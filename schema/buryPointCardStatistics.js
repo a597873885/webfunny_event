@@ -30,7 +30,7 @@ const BuryPointCardStatistics = function (sequelize, DataTypes) {
     },
      // 计数字段：代表图中哪种数据
      calcField: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(100),
       allowNull: false,
       field: 'calcField'
     },
@@ -83,7 +83,45 @@ const BuryPointCardStatistics = function (sequelize, DataTypes) {
     // 如果为 true 则表的名称和 model 相同，即 user
     // 为 false MySQL创建的表名称会是复数 users
     // 如果指定的表名称本就是复数形式则不变
-    freezeTableName: true
+    freezeTableName: true,
+    indexes: [
+      {
+        name: "idx_pageId",
+        method: "BTREE",
+        fields: [
+          {
+            attribute: "pageId"
+          }
+        ]
+      },
+      {
+        name: "idx_cardId",
+        method: "BTREE",
+        fields: [
+          {
+            attribute: "cardId"
+          }
+        ]
+      },
+      {
+        name: "idx_happenDate",
+        method: "BTREE",
+        fields: [
+          {
+            attribute: "happenDate"
+          }
+        ]
+      },
+      {
+        name: "idx_calcField",
+        method: "BTREE",
+        fields: [
+          {
+            attribute: "calcField"
+          }
+        ]
+      },
+    ]
   })
 
 }

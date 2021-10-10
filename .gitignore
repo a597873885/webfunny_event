@@ -20,6 +20,7 @@ bin/*
 interceptor
 config/db.js
 lib/temp.min.js.map
+lib/sdkReleaseScript*.js
 webfunny_event/
 schema_temp/
 alarm/

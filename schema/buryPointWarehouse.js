@@ -9,7 +9,7 @@ const BuryPointWarehouse = function (sequelize, DataTypes) {
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
-      AUTO_INCREMENT: 1000
+      AUTO_INCREMENT: 100
     },
     // 点位名称
     pointName: {

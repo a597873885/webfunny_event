@@ -37,13 +37,12 @@ const BuryPointCardStatistics = function (sequelize, DataTypes) {
     // 发生日期
     happenDate: {
       type: DataTypes.DATE,
-      get() {
-        return moment(this.getDataValue('happenDate')).format('YYYY-MM-DD HH:mm:ss');
-      }
+      allowNull: false,
+      field: 'happenDate'
     },
     // 统计数值
     count: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(20),
       allowNull: false,
       field: 'count'
     },

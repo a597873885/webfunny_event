@@ -64,6 +64,7 @@ const createRoutes = (router) => {
     router.post('/team', TeamController.create);
     // 获取团队列表
     router.post("/getTeamList", TeamController.getTeamList)
+    router.get("/getTeams", TeamController.getTeams)
     router.post("/addTeamMember", TeamController.addTeamMember)
     router.post("/createNewTeam", TeamController.createNewTeam)
     router.post('/deleteTeam', TeamController.deleteTeam);
@@ -212,6 +213,9 @@ const createRoutes = (router) => {
     
     router.get('/test/calcu', TimerStatisticController.calculateDataPreDay);
     router.get('/test/update', TimerStatisticController.test);
+
+
+    router.get('/test/deleteTable', Common.startDelete);
 
 
 

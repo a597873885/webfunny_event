@@ -9,30 +9,6 @@ const {Common, UserController, SdkReleaseController, TimerStatisticController} =
 module.exports = async (customerWarningCallback) => {
 
     /**
-     * 3秒后开始接收消息队列里的数据
-     * */
-    //setTimeout(() => {
-    //    if (accountInfo.messageQueue === true) {
-            // 开始接收消息队列的消息
-    //        Common.startReceiveMsg()
-    //        Common.startReceiveMsgForMog()
-    //    }
-        // 将每个项目的配置放入全局变量中
-    //    Common.setProjectConfigList()
-        
-        // 将项目的webMonitorId列表放入全局变量，并放入bin/webMonitorIdList.js文件中
-        // Common.setStopWebMonitorIdList()
-    //}, 3000)
-    
-    Common.consoleInfo()
-    // 初始化登录验证码
-    UserController.setValidateCode()
-    global.monitorInfo.loginValidateCodeTimer = setInterval(() => {
-        UserController.setValidateCode()
-    }, 5 * 60 * 1000)
-
-
-    /**
      * 1、每天凌晨生成今天和明天的表
      * 2、跑定时执行计算规则
      * 3、删除以前的表
@@ -73,4 +49,26 @@ module.exports = async (customerWarningCallback) => {
         }
         setTimeout(fixed, 1000);
     }, 6000);
+    /**
+     * 3秒后开始接收消息队列里的数据
+     * */
+    //setTimeout(() => {
+    //    if (accountInfo.messageQueue === true) {
+            // 开始接收消息队列的消息
+    //        Common.startReceiveMsg()
+    //        Common.startReceiveMsgForMog()
+    //    }
+        // 将每个项目的配置放入全局变量中
+    //    Common.setProjectConfigList()
+        
+        // 将项目的webMonitorId列表放入全局变量，并放入bin/webMonitorIdList.js文件中
+        // Common.setStopWebMonitorIdList()
+    //}, 3000)
+    
+    Common.consoleLogo()
+    // 初始化登录验证码
+    UserController.setValidateCode()
+    global.monitorInfo.loginValidateCodeTimer = setInterval(() => {
+        UserController.setValidateCode()
+    }, 5 * 60 * 1000)
 }

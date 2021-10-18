@@ -4,20 +4,17 @@ var fs = require('fs');
 var pathArray = ["./bin/domain.js", "./bin/httpReqRes.js", "./bin/messageQueue.js", "./bin/mysqlConfig.js", "./bin/purchaseCode.js", "./bin/saveDays.js", "./bin/slave.js", "./bin/stayTimeScope.js", "./bin/stopWebMonitorIdList.js", "./bin/sysMonitor.js", "./bin/useCusEmailSys.js", "./bin/webfunny_event.js", "./bin/webMonitorIdList.js"]
 var fileArray = [
     `module.exports = {
-      // 1. 日志服务（接口）域名  书写形式：localhost:8011;
+      // 1. 日志服务（接口）域名  书写形式：localhost:8015;
       // 2. 如果设置空字符串，则会使用浏览器域名
-      localServerDomain: 'localhost:8011',
+      localServerDomain: 'localhost:8015',
 
-      // 数据可视化服务域名 书写形式：localhost:8010;
-      localAssetsDomain: 'localhost:8010',
-      
-      // 数据可视化服务域名 书写形式：localhost:8010
-      localAssetsDomain: 'localhost:8010',
+      // 数据可视化服务域名 书写形式：localhost:8014;
+      localAssetsDomain: 'localhost:8014',
       
       // 日志服务端口号
-      localServerPort: '8011',
+      localServerPort: '8015',
       // 可视化系统端口号
-      localAssetsPort: '8010',
+      localAssetsPort: '8014',
   
       /**
        * 注意：不懂可以不用设置，【千万不要乱设置】

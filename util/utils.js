@@ -160,6 +160,15 @@ const Utils = {
       return encryptString
     }
   },
+  md5Hex: function(encryptString) {
+    try {
+      let hash = crypto.createHash('md5');
+      return hash.update(encryptString).digest('hex');
+    } catch(e) {
+      console.log(e)
+      return encryptString
+    }
+  },
   setTableName(name, day) {
     return name + new Date(new Date().getTime() + (86400000 * (day))).Format("yyyyMMdd")
   },

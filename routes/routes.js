@@ -1,4 +1,4 @@
-const {CommonUpLog,BuryPointCardController,BuryPointCardStatisticsController,BuryPointFieldController,BuryPointWarehouseController,BuryPointTestController,ConfigController,MessageController,TeamController,TimerStatisticController,CommonUtil,BuryPointProjectController,Common,ProjectController,SdkReleaseController,UserController} = require("../controllers/controllers.js")
+const {CommonUpLog,BuryPointCardController,BuryPointCardStatisticsController,BuryPointFieldController,BuryPointWarehouseController,BuryPointTestController,ConfigController,MessageController,TeamController,TimerStatisticController,CommonUtil,BuryPointProjectController,Common,SdkReleaseController,UserController} = require("../controllers/controllers.js")
 
 
 const createRoutes = (router) => {
@@ -72,51 +72,6 @@ const createRoutes = (router) => {
     router.post('/updateTeamProjects', TeamController.updateTeamProjects)
     // 获取所有团队列表
     router.post("/getAllTeamList", TeamController.getAllTeamList)
-    
-
-    /**
-     * 应用接口
-     */
-    // 添加应用
-    router.post('/project', ProjectController.create);
-    // 删除应用
-    router.get('/deleteProject', ProjectController.deleteProject);
-    // 获取应用详细信息
-    router.get('/projectDetail', ProjectController.detail);
-    // 获取应用列表
-    router.get('/project/list', ProjectController.getProjectList);
-    // 获取应用列表
-    router.get('/webMonitorIdList', ProjectController.getWebMonitorIdList);
-    // 获取应用详情
-    router.get('/project/detail', ProjectController.getProjectDetail);
-    // 更新启动列表
-    router.get('/project/updateStartList', ProjectController.updateStartList);
-    // 更新探针代码
-    router.get('/project/updateMonitorCode', ProjectController.updateMonitorCode);
-    // 获取所有应用列表
-    router.get('/project/list/all', ProjectController.getAllProjectList);
-    // 获取所有应用列表详情
-    router.get('/project/detailList', ProjectController.getProjectDetailList);
-    // 创建新的监控项目
-    router.post('/createNewProject', ProjectController.createNewProject);
-    // 创建新的监控项目
-    router.get('/checkProjectCount', ProjectController.checkProjectCount);
-    // 暂停项目的日志上报
-    router.post('/changeLogServerStatusByWebMonitorId', ProjectController.changeLogServerStatusByWebMonitorId)
-    // 获取暂停日志上报的项目列表
-    router.post('/getStopWebMonitorIdList', ProjectController.getStopWebMonitorIdList)
-    // 获取userTags
-    router.post('/getUserTags', ProjectController.getUserTags)
-    // 保存userTags
-    router.post('/saveUserTags', ProjectController.saveUserTags)
-    // 获取项目配置
-    router.post('/getProjectConfig', ProjectController.getProjectConfig)
-    // 保存项目配置
-    router.post('/saveProjectConfig', ProjectController.saveProjectConfig)
-    // 开启项目监控
-    router.post('/openProject', ProjectController.openProject)
-    // 保存警报信息相关
-    router.post('/saveAlarmInfo', ProjectController.saveAlarmInfo)
 
     /**
      * 推送信息相关

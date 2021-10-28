@@ -36,7 +36,7 @@ module.exports = async (customerWarningCallback) => {
                 }
                 //每天凌晨0点10分开始跑定时执行计算规则
                 if (hourTimeStr === '00:10:00'){
-                    await TimerStatisticController.calculateDataPreDay('');
+                    await TimerStatisticController.calculateDataPreDay('',-1);
                 }
                  // 凌晨2点30开始删除过期的数据库表
                  if (hourTimeStr == "02:30:00") {

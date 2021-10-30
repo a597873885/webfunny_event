@@ -1,9 +1,10 @@
-const { saveDays } = require("../bin/saveDays")
+const { saveDays,isOpenTodayStatistic } = require("../bin/saveDays")
 const stayTimeScope = require("../bin/stayTimeScope")
 const mysqlConfig = require("../bin/mysqlConfig")
-const { purchaseCode, secretCode } = require("../bin/purchaseCode")
+const { purchaseCode,secretCode } = require("../bin/purchaseCode")
 const { messageQueue } = require("../bin/messageQueue")
 const { openMonitor } = require("../bin/sysMonitor")
+const httpReqRes = require("../bin/httpReqRes")
 const { useCusEmailSys, emailUser, emailPassword } = require("../bin/useCusEmailSys")
 const { localServerDomain, localAssetsDomain, localServerPort, localAssetsPort, mainDomain } = require("../bin/domain")
 
@@ -18,11 +19,12 @@ const accountInfo = {
     mainDomain,  // 主域名
 
     purchaseCode,                   // 激活码
-    secretCode,                     // 解码
+    secretCode,                   // 解码
     messageQueue,                   // 消息队列默认关闭，需手动开启。 前提：安装RabbitMq;
     openMonitor,                    // 开启系统监控
 
     saveDays,                       // 日志保存周期
+    isOpenTodayStatistic,           //是否开启统计今天的数据（每小时分析一次，true：开启，false：不开启，默认开启）
 
     stayTimeScope,                  // 用户停留时间范围
 
@@ -31,6 +33,8 @@ const accountInfo = {
     useCusEmailSys,                 // 是否开启自定义邮件系统
     emailUser,
     emailPassword,
+
+    httpReqRes,                     // 接口内容长度限制
 }
 
 module.exports = {

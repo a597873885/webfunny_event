@@ -36,11 +36,16 @@ module.exports = async (customerWarningCallback) => {
                 }
                 //每天凌晨0点10分开始跑定时执行计算规则
                 if (hourTimeStr === '00:10:00'){
-                    await TimerStatisticController.calculateDataPreDay('',-1);
+                    TimerStatisticController.calculateDataPreDay('', -1);
                 }
-                 // 凌晨2点30开始删除过期的数据库表
-                 if (hourTimeStr == "02:30:00") {
+                // 凌晨2点30开始删除过期的数据库表
+                if (hourTimeStr == "02:30:00") {
                     Common.startDelete()
+                }
+                // 每小时的06分，开始统计今天的数据
+                let isOpenTodayStatistic = accountInfo.isOpenTodayStatistic
+                if (isOpenTodayStatistic && minuteTimeStr == "06:00") {
+                    TimerStatisticController.calculateDataPreDay('', 0);
                 }
             } catch(e) {
                 log.printError("定时器执行报错：", e)

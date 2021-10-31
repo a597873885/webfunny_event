@@ -53,6 +53,7 @@ var fileArray = [
     }`,
     `module.exports = {
         saveDays: '8',
+        isOpenTodayStatistic: true,//是否开启统计今天的数据（每小时分析一次，true：开启，false：不开启，默认不开启）
     }`,
     `var app = require('../app');
     var { accountInfo } = require("../config/AccountConfig")

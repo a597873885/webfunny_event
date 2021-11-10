@@ -34,6 +34,12 @@ const BuryPointCard = function (sequelize, DataTypes) {
       allowNull: false,
       field: 'calcRule'
     },
+    // 排序
+    sort: {
+      type: DataTypes.INTEGER(5),
+      allowNull: true,
+      field: 'sort'
+    },
     // 创建人
     createBy: {
       type: DataTypes.STRING(200),

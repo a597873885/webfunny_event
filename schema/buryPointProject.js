@@ -13,7 +13,7 @@ const BuryPointProject = function (sequelize, DataTypes) {
     },
     // 项目ID event1001开始
     projectId: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(100),
       allowNull: true,
       field: 'projectId'
     },
@@ -25,7 +25,7 @@ const BuryPointProject = function (sequelize, DataTypes) {
     },
     // 名称
     name: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING(200),
       allowNull: false,
       field: 'name'
     },

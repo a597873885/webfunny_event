@@ -25,14 +25,20 @@ const BuryPointCardStatistics = function (sequelize, DataTypes) {
      // 卡片名称
      cardName: {
       type: DataTypes.STRING(128),
-      allowNull: false,
+      allowNull: true,
       field: 'cardName'
     },
      // 计数字段：代表图中哪种数据
      calcField: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
+      type: DataTypes.STRING(200),
+      allowNull: true,
       field: 'calcField'
+    },
+     // 计数字段：代表图中哪种数据
+     calcFieldKey: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      field: 'calcFieldKey'
     },
     // 发生日期
     happenDate: {

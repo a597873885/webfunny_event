@@ -12,13 +12,13 @@ const BuryPointField = function (sequelize, DataTypes) {
     },
     // 字段名称英文
     fieldName: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING(200),
       allowNull: false,
       field: 'fieldName'
     },
     // 字段名称中文（用户输入的）
     fieldAlias: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING(200),
       allowNull: false,
       field: 'fieldAlias'
     },

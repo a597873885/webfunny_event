@@ -12,20 +12,20 @@ const SdkRelease = function (sequelize, DataTypes) {
     },
     // 项目id
     projectId: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(100),
       allowNull: false,
       field: 'projectId'
     },
     // 名称
     releaseName: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING(200),
       allowNull: false,
       field: 'releaseName'
     },
 
     // 所有点位id
     pointIds: {
-      type: DataTypes.STRING(500),
+      type: DataTypes.TEXT,
       allowNull: false,
       field: 'pointIds'
     },
@@ -43,7 +43,7 @@ const SdkRelease = function (sequelize, DataTypes) {
     },
     // 发布版本
     version: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(20),
       allowNull: false,
       field: 'version'
     },

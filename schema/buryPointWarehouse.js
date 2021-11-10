@@ -13,14 +13,14 @@ const BuryPointWarehouse = function (sequelize, DataTypes) {
     },
     // 点位名称
     pointName: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING(200),
       allowNull: false,
       field: 'pointName'
     },
 
     // 所有字段
     fields: {
-      type: DataTypes.STRING(500),
+      type: DataTypes.TEXT,
       allowNull: false,
       field: 'fields'
     },

@@ -1,4 +1,4 @@
-const {CommonUpLog,BuryPointCardController,BuryPointCardStatisticsController,BuryPointFieldController,BuryPointWarehouseController,BuryPointTestController,ConfigController,MessageController,TeamController,TimerStatisticController,CommonUtil,BuryPointProjectController,Common,SdkReleaseController,UserController} = require("../controllers/controllers.js")
+const {CommonUpLog,BuryPointCardController,BuryPointCardStatisticsController,BuryPointFieldController,BuryPointWarehouseController,BuryPointTestController,ConfigController,MessageController,TeamController,TimerStatisticController,CommonUtil,BuryPointProjectController,Common,SdkReleaseController,UserController,FailController} = require("../controllers/controllers.js")
 
 
 const createRoutes = (router) => {
@@ -111,7 +111,8 @@ const createRoutes = (router) => {
      * 获取所有数据库表名
      */
     router.get('/getAllTableList', Common.getAllTableList);
-
+    // 更新激活码
+    router.post('/createPurchaseCode', FailController.createPurchaseCode);
     /**
      * 点位字段接口
      */

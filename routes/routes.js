@@ -156,6 +156,7 @@ const createRoutes = (router) => {
     router.post('/buryPointProject/update', BuryPointProjectController.update);
     router.post('/buryPointProject/delete', BuryPointProjectController.delete);
     router.get('/buryPointProject/tree', BuryPointProjectController.tree);
+    router.get('/buryPointProject/getProjectList', BuryPointProjectController.getProjectList);
     router.get('/buryPointProject/all', BuryPointProjectController.getAllList);
     router.get('/buryPointProject/allProject', BuryPointProjectController.getAllProjectList);
 
@@ -169,6 +170,10 @@ const createRoutes = (router) => {
     router.get('/buryPointCard/detail', BuryPointCardController.detail);
     router.post('/buryPointCard/sort', BuryPointCardController.sort);
 
+     /**
+     * 打点测试
+     */
+    router.post('/buryPointTest/page', BuryPointTestController.getPageList);
     
     router.get('/test/calcu', TimerStatisticController.calculateDataPreDay);
     router.get('/test/update', TimerStatisticController.test);

@@ -4,6 +4,7 @@ const myAtob = require("atob")
 const fetch = require('node-fetch')
 const uuid = require('node-uuid')
 const nodemailer = require('nodemailer')
+const {slugify } = require('transliteration');
 const timeout = 300000
 const Utils = {
   isArray(object) {
@@ -536,6 +537,25 @@ const Utils = {
     }).catch(error => {
       console.log(error.msg)
     })
+  },
+  pinYinToHump(pinyin){
+    //1、"用户id"转成拼音yong_hu_id;
+    let fieldNamePinyin = slugify(pinyin);
+    //2、按-分割
+    let fieldNameArr = fieldNamePinyin.split("-");
+    let fieldName = '';
+    if(fieldNameArr.length > 1){
+        fieldName = fieldName + fieldNameArr[0];
+        for(let i=1;i<fieldNameArr.length;i++){
+            //3、找到第一个字母转大写，然后拼接上
+            let firstNameInfo = fieldNameArr[i].substr(0,1).toUpperCase();
+            let secondNameInfo = fieldNameArr[i].substr(1,fieldNameArr[i].length);
+            fieldName = fieldName + firstNameInfo + secondNameInfo;
+        }
+    }else {
+        fieldName = fieldNamePinyin;
+    }
+    return fieldName;
   }
 }
 

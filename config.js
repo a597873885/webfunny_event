@@ -1,5 +1,10 @@
-const { localServerDomain, localAssetsDomain, localServerPort, localAssetsPort, mainDomain } = require('./bin/domain')
-const { secretCode = "" } = require('./bin/purchaseCode')
+const { accountInfo } = require('./config/AccountConfig');
+
+const {localServerDomain, localAssetsDomain, localServerPort, localAssetsPort, mainDomain} = accountInfo;
+const { secretCode = "" } = accountInfo;
+
+// const { localServerDomain, localAssetsDomain, localServerPort, localAssetsPort, mainDomain } = require('./bin/domain')
+// const { secretCode = "" } = require('./bin/purchaseCode')
 
 if (localServerDomain.indexOf("http://") != -1 || localServerDomain.indexOf("https://") != -1) {
   console.log("\x1b[91m%s\x1b[0m", "域名配置不要加上 http协议前缀，标准格式为：www.baidu.com 或者 www.baidu.com:8011")

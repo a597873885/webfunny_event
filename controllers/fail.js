@@ -14,14 +14,14 @@ class FailController {
     const param = JSON.parse(req)
     const { inputPurchaseCode } = param
 
-    const newString = `module.exports = {
-      purchaseCode: '${inputPurchaseCode}',
-    }`
-    await fs.writeFile("./bin/purchaseCode.js", newString, (err) => {
-      if (err) {
-        throw err;
-      }
-    });
+    // const newString = `module.exports = {
+    //   purchaseCode: '${inputPurchaseCode}',
+    // }`
+    // await fs.writeFile("./bin/purchaseCode.js", newString, (err) => {
+    //   if (err) {
+    //     throw err;
+    //   }
+    // });
 
     await ConfigModel.updateConfig("purchaseCode", {configValue: inputPurchaseCode})
 

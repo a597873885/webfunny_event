@@ -5,7 +5,7 @@ const verify = jwt.verify
 const statusCode = require('../util/status-code')
 const { UserModel } = require("../modules/models.js")
 // 检查登录白名单
-const ignorePaths = ["/upEvent","/sdkRelease/downLoad","/getSysInfo", "/getValidateCode", "/refreshValidateCode", "/login", "/register", "/registerForAdmin", "/sendRegisterEmail", "/resetPwd", "/upBp"]
+const ignorePaths = ["/upEvent","/export","/sdkRelease/downLoad","/getSysInfo", "/getValidateCode", "/refreshValidateCode", "/login", "/register", "/registerForAdmin", "/sendRegisterEmail", "/resetPwd", "/upBp"]
 
 
 /**

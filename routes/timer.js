@@ -44,7 +44,7 @@ module.exports = async (customerWarningCallback) => {
                 }
                 // 每小时的06分，开始统计今天的数据
                 let isOpenTodayStatistic = accountInfo.isOpenTodayStatistic
-                if (isOpenTodayStatistic && minuteTimeStr == "06:00") {
+                if (isOpenTodayStatistic && minuteTimeStr == "16:00") {
                     TimerStatisticController.calculateDataPreDay('', 0);
                 }
             } catch(e) {

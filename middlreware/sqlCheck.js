@@ -26,7 +26,7 @@ module.exports = function () {
             })
             if (!goOnFlag) {
                 ctx.response.status = 413;
-                ctx.body = statusCode.ERROR_413(`请求参数不合法`);
+                ctx.body = statusCode.ERROR_413(`请求参数不合法，不能包含;,',<,>,(,)`);
                 return
             }
         }

@@ -1,212 +1,68 @@
 var fs = require('fs');
 
-// 初始化bin目录
-var pathArray = ["./bin/domain.js", "./bin/httpReqRes.js", "./bin/messageQueue.js", "./bin/mysqlConfig.js", "./bin/purchaseCode.js", "./bin/saveDays.js", "./bin/slave.js", "./bin/stayTimeScope.js", "./bin/stopWebMonitorIdList.js", "./bin/sysMonitor.js", "./bin/useCusEmailSys.js", "./bin/webfunny_event.js", "./bin/webMonitorIdList.js"]
+// 初始化config_variable目录
+var pathArray = ["./config_variable/config.json",]
 var fileArray = [
-    `module.exports = {
-      // 1. 日志服务（接口）域名  书写形式：localhost:8015;
-      // 2. 如果设置空字符串，则会使用浏览器域名
-      localServerDomain: 'localhost:8015',
-
-      // 数据可视化服务域名 书写形式：localhost:8014;
-      localAssetsDomain: 'localhost:8014',
-      
-      // 日志服务端口号
-      localServerPort: '8015',
-      // 可视化系统端口号
-      localAssetsPort: '8014',
-  
-      /**
-       * 注意：不懂可以不用设置，【千万不要乱设置】
-       * 
-       * 1. 什么情况设置：如果同一个主域名下有多个项目，并且同一个UserId的用户，会访问这多个项目
-       * 2. 设置结果：使用userId查询，可以将一个用户在多个项目上的行为串联起来。
-       * 
-       * 例如：www.baidu.com  主域名就是：baidu.com
-       */
-      mainDomain: '' // 默认空字符串就行了
-    }`,
-    `module.exports = {
-      requestTextLength: 1000,  // 接口请求参数内容长度限制
-      responseTextLength: 1000,  // 接口返回结果内容长度限制
-    }
-    `,
-    `module.exports = {
-        messageQueue: false  // 是否开启消息队列，默认不开启
-    }`,
-    `module.exports = {
-      write: {
-        ip: '',
-        port: '3306',
-        dataBaseName: 'webfunny_db',
-        userName: '',
-        password: ''
+    `{
+      "purchase": {
+        "purchaseCode": "",
+        "secretCode": ""
       },
-      // 高性能版支持此属性
-      read: [
-        // { host: "", username: "", password: "" }
-      ]
-    }`,
-    `module.exports = {
-        purchaseCode: '',
-        secretCode: ''
-    }`,
-    `module.exports = {
-        saveDays: '8',
-        isOpenTodayStatistic: true,//是否开启统计今天的数据（每小时分析一次，true：开启，false：不开启，默认不开启）
-    }`,
-    `var app = require('../app');
-    var { accountInfo } = require("../config/AccountConfig")
-    
-    global.serverType = "slave"
-    
-    var port = normalizePort(process.env.PORT || accountInfo.localServerPort);
-    app.listen(port);
-    
-    function normalizePort(val) {
-      var port = parseInt(val, 10);
-    
-      if (isNaN(port)) {
-        // named pipe
-        return val;
+      "domain": {
+        "localServerDomain": "localhost:8015",
+        "localAssetsDomain": "localhost:8014",
+        "localServerPort": "8015",
+        "localAssetsPort": "8014",
+        "mainDomain": ""
+      },
+      "mysqlConfig": {
+          "write": {
+            "ip": "localhost",
+            "port": "3306",
+            "dataBaseName": "webfunny_db_event",
+            "userName": "root",
+            "password": "123456"
+          },
+          "read": []
+      },
+      "email": {
+        "useCusEmailSys": false,
+        "emailUser": "",
+        "emailPassword": ""
+      },
+      "messageQueue": false,
+      "openMonitor": true,
+      "logSaveDays": 8,
+      "isOpenTodayStatistic": true,
+      "business": {
+        "userStayTimeScope": {
+          "min": 100,
+          "max": 100000
+        }
       }
-    
-      if (port >= 0) {
-        // port number
-        return port;
-      }
-    
-      return false;
-    }
-    `,
-    `/**
-      * 用户停留时间，去掉最大值，去掉最小值范围
-      * 
-      * 去掉最小值： 有些用户进来了就离开，可以不考虑在内
-      * 去掉最大值： 有些用户进来了，处于不活跃状态，停留时间会很长，也可以去除
-      */
-    module.exports = {
-        min: 100,     // 最小值
-        max: 100000   // 最大值
-    }`,
-    `// 停止日志上报列表
-    module.exports = []`,
-    `module.exports = {
-      openMonitor: true  // 企业版可关闭此选项
-    }`,
-    `module.exports = {
-      useCusEmailSys: false,               // 是否使用自己的邮件系统, true: 使用配置的邮箱密码；false: 由webfunny系统给你发送邮件
-      emailUser: "",                       // 163邮箱用户名
-      emailPassword: ""                    // 163邮箱，网易老账号用密码， 新账号用安全码
-    }`,
-    `#!/usr/bin/env node
-
-    var app = require('../app');
-    var debug = require('debug')('demo:server');
-    var { accountInfo } = require("../config/AccountConfig")
-    
-    var port = normalizePort(process.env.PORT || accountInfo.localServerPort);
-    app.listen(port);
-    
-    function normalizePort(val) {
-      var port = parseInt(val, 10);
-    
-      if (isNaN(port)) {
-        // named pipe
-        return val;
-      }
-    
-      if (port >= 0) {
-        // port number
-        return port;
-      }
-    
-      return false;
-    }
-    
-    function onError(error) {
-      if (error.syscall !== 'listen') {
-        throw error;
-      }
-    
-      var bind = typeof port === 'string'
-        ? 'Pipe ' + port
-        : 'Port ' + port;
-    
-      // handle specific listen errors with friendly messages
-      switch (error.code) {
-        case 'EACCES':
-          console.error(bind + ' requires elevated privileges');
-          process.exit(1);
-          break;
-        case 'EADDRINUSE':
-          console.error(bind + ' is already in use');
-          process.exit(1);
-          break;
-        default:
-          throw error;
-      }
-    }
-    
-    function onListening() {
-      var addr = server.address();
-      var bind = typeof addr === 'string'
-        ? 'pipe ' + addr
-        : 'port ' + addr.port;
-      debug('Listening on ' + bind);
-    }
-    
-    // 启动静态文件服务器
-    const KoaStatic = require('koa');
-    const appStatic = new KoaStatic();
-    const server = require('koa-static-cache');
-    /* gzip压缩配置 start */
-    const compress = require('koa-compress');
-    const options = { 
-        threshold: 1024 //数据超过1kb时压缩
-    };
-    /* gzip压缩配置 end */
-    
-    // 1.主页静态网页 把静态页统一放到public中管理
-    const publicServer = server('./views');
-    // 2.重定向判断
-    const redirect = ctx => {
-      ctx.response.redirect('/webfunny_event/home.html')
-    };
-    // 3.分配路由
-    appStatic.use(compress(options))
-    appStatic.use(async (ctx, next) => {
-      if (ctx.url === '/' || ctx.url === '/webfunny_event/') {
-        redirect(ctx)
-      } else {
-        await next()
-      }
-    });
-    appStatic.use(publicServer);
-    appStatic.listen(accountInfo.localAssetsPort);`,
-    `module.exports = []`
+    }`
 ]
 
-// fs.mkdir( "./bin", function(err){
-//   if ( err ) { 
-//     console.log("= 文件夹 /bin 已经存在")
-//   } else {
-//     console.log("= 创建文件夹 /bin")
-//   }
-//   pathArray.forEach((path, index) => {
-//       fs.readFile(path, "", (err) => {
-//           if (err) {
-//               console.log("× " + path + " 配置文件不存在，即将创建...")
-//               fs.writeFile(path, fileArray[index], (err) => {
-//                   if (err) throw err;
-//                   console.log("√ " + path + " 配置文件创建完成！");
-//               });
-//           } else {
-//               console.log("√ " + path + " 配置文件已存在！")
-//           }
-//       });
-//   })
-// });
+fs.mkdir( "./config_variable", function(err){
+  if ( err ) { 
+    console.log("= 文件夹 /config_variable 已经存在")
+  } else {
+    console.log("= 创建文件夹 /config_variable")
+  }
+  pathArray.forEach((path, index) => {
+      fs.readFile(path, "", (err) => {
+          if (err) {
+              console.log("× " + path + " 配置文件不存在，即将创建...")
+              fs.writeFile(path, fileArray[index], (err) => {
+                  if (err) throw err;
+                  console.log("√ " + path + " 配置文件创建完成！");
+              });
+          } else {
+              console.log("√ " + path + " 配置文件已存在！")
+          }
+      });
+  })
+});
 
 /**
  * 初始化alarm目录

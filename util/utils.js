@@ -3,6 +3,7 @@ const crypto = require("crypto")
 const myAtob = require("atob")
 const fetch = require('node-fetch')
 const uuid = require('node-uuid')
+const getmac = require('getmac')
 const nodemailer = require('nodemailer')
 const {slugify } = require('transliteration');
 const timeout = 300000
@@ -18,6 +19,21 @@ const Utils = {
       var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
       return v.toString(16);
     });
+  },
+  getMac: function() {
+    let macAddress = ""
+    try {
+      macAddress = getmac.default()
+    } catch(e) {
+      macAddress = "unknown"
+    }
+    return macAddress
+  },
+  postPoint(url, params = {}, httpCustomerOperation = { isHandleResult: true }) {
+    const method = "POST"
+    const body = JSON.stringify(params)
+    const fetchParams = Object.assign({}, { method, body}, this.getHeadersJson())
+    return Utils.handleFetchData(url, fetchParams, httpCustomerOperation)
   },
   handleDateResult: function(result, scope = 30) {
     function addDate(date, days) {

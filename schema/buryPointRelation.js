@@ -1,8 +1,8 @@
 //delete//
 const moment = require('moment');
 //delete//
-const BuryPointCard = function (sequelize, DataTypes) {
-  return sequelize.define('BuryPointCard', {
+const BuryPointRelation = function (sequelize, DataTypes) {
+  return sequelize.define('BuryPointRelation', {
     // ID 主键
     id: {
       type: DataTypes.INTEGER(11),
@@ -10,41 +10,23 @@ const BuryPointCard = function (sequelize, DataTypes) {
       allowNull: false,
       autoIncrement: true,
     },
-    // 页面id
-    pageId: {
+    // 点位id
+    pointId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      field: 'pageId'
-    },
-    // 名称
-    name: {
-      type: DataTypes.STRING(128),
-      allowNull: false,
-      field: 'name'
-    },
-    // 级别：卡片类型：1-柱状图，2-多折线，3-柱线图，4-堆叠图，5-漏斗图
-    type: {
-      type: DataTypes.INTEGER(1),
-      allowNull: false,
-      field: 'type'
-    },
-    // 计算规则
-    calcRule: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      field: 'calcRule'
+      field: 'pointId'
     },
     // 排序
-    sort: {
-      type: DataTypes.INTEGER(5),
-      allowNull: true,
-      field: 'sort'
+    stepColum: {
+      type: DataTypes.INTEGER(2),
+      allowNull: false,
+      field: 'stepColum'
     },
-    // 转化周期：默认是1 
-    conversionCycle: {
-      type: DataTypes.INTEGER(5),
-      allowNull: true,
-      field: 'conversionCycle'
+    // 卡片id
+    cardId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      field: 'cardId'
     },
     // 创建人
     createBy: {
@@ -81,5 +63,5 @@ const BuryPointCard = function (sequelize, DataTypes) {
 
 }
 //exports//
-module.exports = BuryPointCard
+module.exports = BuryPointRelation
 //exports//

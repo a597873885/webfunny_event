@@ -514,6 +514,46 @@ const Utils = {
     return newStr;
   },
 
+   /**
+   * 且或转换
+   * String , Number
+   */
+  convertAndOr(str) {
+    let newStr;
+    switch(str) {
+      case "a":
+        newStr = "and"
+        break
+      case "o":
+        newStr = "or"
+        break
+      default:
+        newStr = "and"
+        break
+    }
+    return newStr;
+  },
+  checkFieldNameValid(fieldName){
+    let goOnFlag = true;
+   //通用字段：id,weFirstStepDay,weHapppenHour,weHapppenMinute,weCustomerKey,weUserId,weSysVersion,weCity,weCountry,weSimpleUrl,weBrowser,weOs,weDeviceSize,createdAt
+   //通用字段：id,weCustomerKey,weUserId,weSimpleUrl,createdAt
+   //weFirstStepDay_1,weFirstStepDay_2,weFirstStepDay_3,weFirstStepDay_4,
+   //weFirstStepDay_5,weFirstStepDay_6,weFirstStepDay_7,weFirstStepDay_8,
+   //weFirstStepDay_9,weFirstStepDay_10
+    const fieldParams = ["id","wefirststepday_1","wefirststepday_2","wefirststepday_3","wefirststepday_4",
+    "wefirstStepday_5","weFirstStepday_6","weFirstStepday_7","weFirstStepday_8","weFirstStepday_9","wefirststepday_10",
+    "wecustomerkey","weuserid","createdat"]
+    const fieldNameConvert = JSON.stringify(fieldName).toLowerCase()
+    fieldParams.forEach((item) => {
+        if (fieldNameConvert.indexOf(item) !== -1) {
+            goOnFlag = false
+        } else if (fieldNameConvert.indexOf(item) !== -1) {
+            goOnFlag = false
+        }
+    })
+    return goOnFlag;
+  },
+
   /**
    * 自己配置邮箱，bin/useCusEmailSys.js 参数改为true
    */
@@ -555,6 +595,7 @@ const Utils = {
     })
   },
   pinYinToHump(pinyin){
+    //TODO 如果是含有数字1、2这种，转成英文数字one、two...
     //1、"用户id"转成拼音yong_hu_id;
     let fieldNamePinyin = slugify(pinyin);
     //2、按-分割

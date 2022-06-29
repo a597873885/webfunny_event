@@ -145,6 +145,7 @@ const createRoutes = (router) => {
     router.post('/sdkRelease/page', SdkReleaseController.getPageList);
     router.post('/sdkRelease/list', SdkReleaseController.getList);
     router.get('/sdkRelease/AllList', SdkReleaseController.getAllList);
+    router.post('/initCf', SdkReleaseController.initFunnelConfig);
     router.post('/upEvent', SdkReleaseController.upEvent);
     router.post('/sdkRelease/createReleaseScript', SdkReleaseController.createReleaseScript);
     router.get('/sdkRelease/downLoad', SdkReleaseController.downloadScript);
@@ -177,6 +178,10 @@ const createRoutes = (router) => {
      */
     router.post('/buryPointTest/page', BuryPointTestController.getPageList);
     
+    router.get('/test/calcu', TimerStatisticController.calculateDataPreDay);
+    router.get('/test/update', TimerStatisticController.test);
+
+
     router.get('/test/calcu', TimerStatisticController.calculateDataPreDay);
     router.get('/test/update', TimerStatisticController.test);
 

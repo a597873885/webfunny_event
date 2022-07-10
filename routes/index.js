@@ -1,7 +1,6 @@
 const Router = require('koa-router')
 const { Common } = require("../controllers/controllers.js")
 const { createRoutes } = require("./routes");
-const { customerWarningCallback } = require("../interceptor/customerWarning")
 const timerTask = require("./timer");
 
 const db = require('../config/db')
@@ -9,7 +8,7 @@ const Sequelize = db.sequelize;
 const ConfigTable = Sequelize.import('../schema/config');
 
 
-global.monitorInfo = {
+global.eventInfo = {
     buryPointTestList: [],//打点测试
     webfunnyTokenList: [],
     registerEmailCode: {},
@@ -45,11 +44,8 @@ const router = new Router({
 const handleResult = () => {
     createRoutes(router)
     // 启动定时任务, 如果是slave模式，则不启动定时器
-    if (global.serverType == "slave") {
-        Common.consoleInfo(global.serverType)
-    } else {
-        timerTask(customerWarningCallback)
-    }
+    timerTask(global.serverType)
+
     // 3秒后开始消费消息
     setTimeout(() => {
         Common.startReceiveMsg()

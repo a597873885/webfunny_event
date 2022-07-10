@@ -3,6 +3,7 @@
 var app = require('../app');
 var debug = require('debug')('demo:server');
 var { accountInfo } = require("../config/AccountConfig")
+global.serverType = "master"
 
 var port = normalizePort(process.env.PORT || accountInfo.localServerPort);
 app.listen(port);

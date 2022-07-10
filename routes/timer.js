@@ -47,6 +47,14 @@ module.exports = async (customerWarningCallback) => {
                 if (isOpenTodayStatistic && minuteTimeStr == "16:00") {
                     TimerStatisticController.calculateDataPreDay('', 0);
                 }
+                // 每隔1分钟，取出全局变量global.eventInfo.logCountInMinute的值，并清0
+                if (minuteTimeStr.substring(3) == "00") {
+                    global.eventInfo.logCountInMinuteList.push(global.eventInfo.logCountInMinute)
+                    global.eventInfo.logCountInMinute = 0
+                    if (global.eventInfo.logCountInMinuteList.length > 60) {
+                        global.eventInfo.logCountInMinuteList.shift()
+                    }
+                }
             } catch(e) {
                 log.printError("定时器执行报错：", e)
             }

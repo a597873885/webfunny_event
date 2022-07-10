@@ -4,8 +4,12 @@ const util = require('util')
 const verify = jwt.verify
 const statusCode = require('../util/status-code')
 const { UserModel } = require("../modules/models.js")
+const AccountConfig = require('../config/AccountConfig')
+const { accountInfo } = AccountConfig
+const Utils = require("../util/utils")
+const log = require("../config/log");
 // 检查登录白名单
-const ignorePaths = ["/initCf","/upEvent","/export","/sdkRelease/downLoad","/getSysInfo", "/getValidateCode", "/refreshValidateCode", "/login", "/register", "/registerForAdmin", "/sendRegisterEmail", "/resetPwd", "/upBp"]
+const ignorePaths = ["/sysInfo","/getConcurrencyByMinuteInHour","/initCf","/upEvent","/export","/sdkRelease/downLoad","/getSysInfo", "/getValidateCode", "/refreshValidateCode", "/login", "/register", "/registerForAdmin", "/sendRegisterEmail", "/resetPwd", "/upBp"]
 
 
 /**
@@ -38,8 +42,12 @@ module.exports = function () {
             // 如果是接口上报，则忽略登录状态判断
             await next();
         } else {
-            // 第一步判断内存中是否有登录过的token, localhost不做内存里的登录态校验
-            if (global.monitorInfo.webfunnyTokenList.indexOf(token) === -1 && ctx.header.host !== "localhost") {
+            // 第一步判断数据库中是否有登录过的token, localhost不做内存里的登录态校验
+            const userTokenDetail = await Utils.postJson(`http://${accountInfo.centerServerDomain}/wfManage/getUserTokenFromNetworkByToken`, {token}).catch((e) => {
+                log.printError("token验证失败", e)
+            })
+
+            if (!userTokenDetail && ctx.header.host !== "localhost") {
                 ctx.response.status = 401;
                 ctx.body = statusCode.ERROR_401("用户未登录");
                 return

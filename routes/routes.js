@@ -1,4 +1,4 @@
-const {CommonUpLog,BuryPointCardController,BuryPointCardStatisticsController,BuryPointFieldController,BuryPointWarehouseController,BuryPointTestController,ConfigController,MessageController,TeamController,TimerStatisticController,CommonUtil,BuryPointProjectController,Common,SdkReleaseController,UserController,FailController} = require("../controllers/controllers.js")
+const {SysInfoController,CommonUpLog,BuryPointCardController,BuryPointCardStatisticsController,BuryPointFieldController,BuryPointWarehouseController,BuryPointTestController,ConfigController,MessageController,TeamController,TimerStatisticController,CommonUtil,BuryPointProjectController,Common,SdkReleaseController,UserController,FailController} = require("../controllers/controllers.js")
 
 
 const createRoutes = (router) => {
@@ -94,8 +94,7 @@ const createRoutes = (router) => {
     router.get('/projectVersion', Common.projectVersion);
     // 获取日志服务所有相关信息
     router.get('/getSysInfo', Common.getSysInfo);
-
-    
+    router.get('/sysInfo', SysInfoController.getSysInfo);
 
     /**
      * Docker 心跳检测

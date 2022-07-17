@@ -5,7 +5,7 @@ const verify = jwt.verify
 const statusCode = require('../util/status-code')
 const { UserModel } = require("../modules/models.js")
 // 检查登录白名单
-const ignorePaths = ["/initCf","/upEvent","/export","/sdkRelease/downLoad","/getSysInfo", "/getValidateCode", "/refreshValidateCode", "/login", "/register", "/registerForAdmin", "/sendRegisterEmail", "/resetPwd", "/upBp"]
+const ignorePaths = ["/sysInfo","/getConcurrencyByMinuteInHour","/initCf","/upEvent","/export","/sdkRelease/downLoad","/getSysInfo", "/getValidateCode", "/refreshValidateCode", "/login", "/register", "/registerForAdmin", "/sendRegisterEmail", "/resetPwd", "/upBp"]
 
 
 /**
@@ -39,7 +39,7 @@ module.exports = function () {
             await next();
         } else {
             // 第一步判断内存中是否有登录过的token, localhost不做内存里的登录态校验
-            if (global.monitorInfo.webfunnyTokenList.indexOf(token) === -1 && ctx.header.host !== "localhost") {
+            if (global.eventInfo.webfunnyTokenList.indexOf(token) === -1 && ctx.header.host !== "localhost") {
                 ctx.response.status = 401;
                 ctx.body = statusCode.ERROR_401("用户未登录");
                 return

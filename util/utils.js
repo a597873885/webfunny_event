@@ -468,6 +468,9 @@ const Utils = {
       case "等于":
         newStr = "="
       break
+      case "不等于":
+        newStr = "!="
+      break
       default:
         break
     }
@@ -595,12 +598,16 @@ const Utils = {
     })
   },
   pinYinToHump(pinyin){
+    let fieldName = '';
     //TODO 如果是含有数字1、2这种，转成英文数字one、two...
     //1、"用户id"转成拼音yong_hu_id;
     let fieldNamePinyin = slugify(pinyin);
+    if (fieldNamePinyin === 'show' || fieldNamePinyin === 'SHOW' ){
+      fieldName = 'newShow';
+      return fieldName; 
+    }
     //2、按-分割
     let fieldNameArr = fieldNamePinyin.split("-");
-    let fieldName = '';
     if(fieldNameArr.length > 1){
         fieldName = fieldName + fieldNameArr[0];
         for(let i=1;i<fieldNameArr.length;i++){

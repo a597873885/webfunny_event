@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "bootstrap": "node config_bin_init.js",
-    "slave": "node config_db_local.js && pm2 start bin/slave.js && pm2 log slave",
+    "slave": "node config_db_local.js && pm2 start config/webfunny_event_slave.js && pm2 log webfunny_event_slave",
     "reslave": "pm2 stop slave | pm2 delete slave | npm run slave",
     "prd": "node config_db_local.js && node config.js && pm2 flush && pm2 start config/webfunny_event.js && pm2 log webfunny_event",
     "restart": "pm2 flush && pm2 stop webfunny_event | pm2 delete webfunny_event | npm run prd",
